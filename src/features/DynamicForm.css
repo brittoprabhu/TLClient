@@ -1,0 +1,18 @@
+.list-group {
+    max-height: 200px; /* Limit height */
+    overflow-y: auto;  /* Enable scrolling */
+    position: absolute; /* Ensure it's positioned correctly */
+    background: white;  /* Ensure the background is white for visibility */
+    z-index: 1000;      /* Ensure it appears on top */
+  }
+  
+  /* Optional: Style the list items for better visibility */
+  .list-group-item {
+    cursor: pointer;     /* Change cursor to pointer for interactivity */
+  }
+  
+  /* Optional: Change the background color on hover */
+  .list-group-item:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+  } 
+  

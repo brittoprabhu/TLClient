@@ -1,0 +1,15 @@
+/* Ensure the body and html use the full height and don't center content */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: block;
+}
+
+/* Fix for any unwanted flex centering */
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}

@@ -1,0 +1,22 @@
+/* RecordList.css */
+.recordlist-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.recordlist, .dynamicform {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recordlist {
+    flex: 2; /* Makes RecordList slightly larger */
+}
+
+.dynamicform {
+    flex: 1;
+}
