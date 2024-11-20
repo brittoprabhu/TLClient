@@ -27,7 +27,7 @@ const VerticalMenu: React.FC = () => {
     }, []);
 
     const handleMenuClick = (parameter: string) => {
-        const schemaPath = `public/schemas/${parameter}.json`;
+        const schemaPath = `schemas/${parameter}.json`;
         setActiveParameter(schemaPath);
     };
 
