@@ -188,13 +188,24 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ jsonFileName, recordId, onNew
 
             if (recordId) {
                 agent.Entities.update(tableName, recordId, submitData)
-                    .then(() => onNewRecordCreated())
-                    .catch(console.error);
+                    .then(() => {
+                        console.log("Update successful, calling onNewRecordCreated");
+                        onNewRecordCreated();
+                    })
+                    .catch(error => {
+                        console.error("Error during update:", error);
+                    });
             } else {
                 agent.Entities.create(tableName, submitData)
-                    .then(() => onNewRecordCreated())
-                    .catch(console.error);
+                    .then(() => {
+                        console.log("Create successful, calling onNewRecordCreated");
+                        onNewRecordCreated();
+                    })
+                    .catch(error => {
+                        console.error("Error during creation:", error);
+                    });
             }
+            
         }
     };
 

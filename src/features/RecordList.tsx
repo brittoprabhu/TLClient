@@ -80,33 +80,36 @@ useEffect(() => {
     fetchSchemaOnce();
 }, [schema, isSchemaLoading]); // Ensure dependencies are stable
 
+const fetchRecords = async (page: number) => {
+    if (loading || recordsFetchedRef.current) {
+        console.warn("Fetch already in progress, skipping...");
+        return;
+    }
 
+    recordsFetchedRef.current = true;
+    try {
+        console.log("Starting fetchRecords for page:", page);
+        setLoading(true);
+        const source = jsonFileName.split('/').pop()?.split('.')[0] || '';
+        const response = await agent.Entities.listAll(source, page, itemsPerPage);
+        setRecords(response.data.records || []);
+        setTotalPages(Math.ceil(response.data.totalRecords / itemsPerPage));
+        console.log("Records fetched successfully:", response.data.records);
+    } catch (error) {
+        console.error('Error fetching records:', error);
+        setRecords([]);
+    } finally {
+        setLoading(false);
+        recordsFetchedRef.current = false;
+    }
+};
     // Fetch records only when page changes and make sure it’s not being called twice
     useEffect(() => {
-        const fetchRecords = async (page: number) => {
-            if (loading || recordsFetchedRef.current) {
-                console.warn("Fetch already in progress, skipping...");
-                return;
-            }
-
-            recordsFetchedRef.current = true;
-            try {
-                console.log("Starting fetchRecords for page:", page);
-                setLoading(true);
-                const source = jsonFileName.split('/').pop()?.split('.')[0] || '';
-                const response = await agent.Entities.listAll(source, page, itemsPerPage);
-                setRecords(response.data.records || []);
-                setTotalPages(Math.ceil(response.data.totalRecords / itemsPerPage));
-                console.log("Records fetched successfully:", response.data.records);
-            } catch (error) {
-                console.error('Error fetching records:', error);
-                setRecords([]);
-            } finally {
-                setLoading(false);
-                recordsFetchedRef.current = false;
-            }
-        };
-
+        
+        if (loading || recordsFetchedRef.current) {
+            console.warn("Fetch already in progress, skipping...");
+            return;
+        }
         fetchRecords(currentPage);
     }, [currentPage, jsonFileName]); // Fetch records on currentPage or jsonFileName change
 
