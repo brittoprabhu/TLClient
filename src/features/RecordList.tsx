@@ -35,7 +35,8 @@ const RecordList: React.FC<{ jsonFileName: string }> = ({ jsonFileName }) => {
     const [itemsPerPage] = useState<number>(2);
     const [showForm, setShowForm] = useState(false);
     
-    const [schema, setSchema] = useState(null);
+    const [schema, setSchema] = useState<Schema | null>(null);
+
     const [isSchemaLoading, setIsSchemaLoading] = useState(false);
     
     // Ref to track if schema has been fetched
